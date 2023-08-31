@@ -1,6 +1,6 @@
-# ECX Fabric Layer2 Connection between two own ports
+# ECX Fabric Layer2 Connection from fabric cloud router to AWS
 
-This example shows how create layer 2 connection between two, own ECX Fabric ports.
+This example shows how create connection from Fabric Cloud Router to AWS, on ECX Fabric ports.
 
 ## Adjust variables
 At minimum, you must set below variables in `terraform.tfvars` file:
@@ -10,29 +10,39 @@ At minimum, you must set below variables in `terraform.tfvars` file:
 * `equinix_client_secret` - Equinix client secret ID (consumer secret),
   obtained same way as above
 
-`aside_port_name` - Name of ECX Fabric a-side port i.e. ops-user100-CX-SV5-NL-Qinq-STD-1G-SEC-JP-111
+`fcr_uuid` - UUID of ECX Fabric Cloud Router on a-side 
 `zside_port_name` -  Name of ECX Fabric z-side port , i.e. ops-user100-CX-SV5-NL-Qinq-BO-10G-SEC-JP-000
-
 `connection_name` - the name of the connection
 `connection_type` - connection type, please refer schema
 `notifications_type` - notification type
 `notifications_emails` - List of emails
 `bandwidth` - bandwidth in MBs
 `redundancy` - Port redundancy
-`aside_ap_type` - Access point type
-`aside_port_uuid` - Port uuid, fetched based on port call using Port resource
-`aside_link_protocol_type` - link protocol type
-`aside_link_protocol_stag` - a-side s tag number
+`aside_ap_type` - Fabric Cloud Router type
 `zside_ap_type` - Z side access point type
-`aside_link_protocol_stag` - z-side s tag number
+`zside_ap_authentication_key` - AWS authorization key, account number like 357848912121
+`zside_ap_profile_type` - Service profile type
+`fabric_sp_name` - Service profile name, fetched based on Service Profile get call using Service Profile search schema
 `zside_location` - Seller location
+`seller_region` - Seller region code
+
+## AWS login
+
+Log in to AWS portal use account that has permission to create necessary resources.
 
 ## Initialize
+- First step is to initialize the terraform directory/resource we are going to work on.
+  In the given example, the folder to perform CRUD operations on a fcr2port connection can be found at examples/fcr2port/.
 
-Change directory to project root to run terra test or change to example directory and initialize Terraform plugins
-by running `terraform init`.
+- Change directory into - `CD fcr2aws/`
+- Initialize Terraform plugins - `terraform init`
 
-## Deploy template
+## Fabric Cloud Router to port connection : Create, Read, Update and Delete(CRUD) operations
+Note: `–auto-approve` command does not prompt the user for validating the applying config. Remove it to get a prompt to confirm the operation.
 
-Apply changes by running `terraform apply`, then **inspect proposed plan**
-and approve it.
+| Operation |              Command              |                                                            Description |
+|:----------|:---------------------------------:|-----------------------------------------------------------------------:|
+| CREATE    |  `terraform apply –auto-approve`  |                                 Creates a fcr2port connection resource |
+| READ      |         `terraform show`          |      Reads/Shows the current state of the fcr2port connection resource |
+| UPDATE    |    `terraform apply -refresh`     | Updates the fcr2port with values provided in the terraform.tfvars file |
+| DELETE    | `terraform destroy –auto-approve` |                       Deletes the created fcr2port connection resource |
