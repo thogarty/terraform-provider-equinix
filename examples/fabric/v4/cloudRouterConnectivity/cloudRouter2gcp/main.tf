@@ -2,7 +2,8 @@ provider "equinix" {
   client_id     = var.equinix_client_id
   client_secret = var.equinix_client_secret
 }
-data "equinix_fabric_service_profiles" "aws" {
+
+data "equinix_fabric_service_profiles" "gcp" {
   filter {
     property = "/name"
     operator = "="
@@ -10,8 +11,7 @@ data "equinix_fabric_service_profiles" "aws" {
   }
 }
 
-
-resource "equinix_fabric_connection" "fcr2aws"{
+resource "equinix_fabric_connection" "fcr2gcp"{
   name = var.connection_name
   type = var.connection_type
   notifications{
@@ -32,23 +32,25 @@ resource "equinix_fabric_connection" "fcr2aws"{
       }
     }
   }
-  z_side {
-    access_point {
-      type= var.zside_ap_type
-      authentication_key= var.zside_ap_authentication_key
-      seller_region = var.seller_region
-      profile {
-        type= var.zside_ap_profile_type
-        uuid= data.equinix_fabric_service_profiles.aws.data.0.uuid
-      }
-      location {
-        metro_code= var.zside_location
+
+    z_side {
+      access_point {
+        type = var.zside_ap_type
+        authentication_key = var.zside_ap_authentication_key
+        seller_region = var.zside_seller_region
+        profile {
+          type = var.zside_ap_profile_type
+          uuid = data.equinix_fabric_service_profiles.gcp.data.0.uuid
+        }
+        location {
+          metro_code = var.zside_location
+        }
       }
     }
-  }
+
 }
 
-output "connection_result" {
-  value = equinix_fabric_connection.fcr2aws.id
+output "cloudRouter2gcp_connection_result" {
+  value = equinix_fabric_connection.fcr2gcp.id
 }
 
