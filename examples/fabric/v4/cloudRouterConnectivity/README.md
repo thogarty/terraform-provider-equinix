@@ -1,14 +1,14 @@
 # Equinix Provider Examples
 
-This directory contains a set of examples of using Equinix services with Terraform.
+This directory contains a set of examples of using Equinix Cloud Router Connectivity services with Terraform.
 Each example has its own README file containing more details on what it does.
 
 Equinix Provider examples are grouped into following directories:
 
-* [connectivity](fabric/) - examples of **establishing connectivity with
+* [portConnectivity](../portConnectivity) - examples of **establishing port connectivity with
 service providers** that are part of Equinix Fabric community, including major
 Cloud Service Providers like Google, Amazon or Microsoft
-* [edge-networking](edge-networking/) - examples of running and connecting
+* [edge-networking](../../../edge-networking) - examples of running and connecting
 **virtual network devices at the network and compute edge**
 
 ## Using examples
