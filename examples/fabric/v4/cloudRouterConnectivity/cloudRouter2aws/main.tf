@@ -48,7 +48,7 @@ resource "equinix_fabric_connection" "fcr2aws"{
   }
 }
 
-output "connection_result" {
+output "cloudRouter2aws_connection_result" {
   value = equinix_fabric_connection.fcr2aws.id
 }
 

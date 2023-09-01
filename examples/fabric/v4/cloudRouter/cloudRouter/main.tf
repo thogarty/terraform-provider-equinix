@@ -27,7 +27,7 @@ resource "equinix_fabric_cloud_router" "test"{
   }
 }
 
-output "fcr_result" {
+output "cloudRouter_result" {
   value = equinix_fabric_cloud_router.test.id
 }
 

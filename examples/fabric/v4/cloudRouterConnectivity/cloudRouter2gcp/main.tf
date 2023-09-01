@@ -50,7 +50,7 @@ resource "equinix_fabric_connection" "fcr2gcp"{
 
 }
 
-output "connection_result" {
+output "cloudRouter2gcp_connection_result" {
   value = equinix_fabric_connection.fcr2gcp.id
 }
 

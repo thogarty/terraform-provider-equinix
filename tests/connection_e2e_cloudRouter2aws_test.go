@@ -7,15 +7,15 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCloudRouter2GcpCreateConnection(t *testing.T) {
+func TestCloudRouter2AwsCreateConnection(t *testing.T) {
 	// retryable errors in terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/fabric-cloud-router/fcr2gcp",
+		TerraformDir: "../examples/fabric-cloud-router/fg2aws",
 	})
 
 	defer terraform.Destroy(t, terraformOptions)
 
 	terraform.InitAndApply(t, terraformOptions)
-	output := terraform.Output(t, terraformOptions, "fcr2gcp_connection_result")
+	output := terraform.Output(t, terraformOptions, "cloudRouter2aws_connection_result")
 	assert.NotNil(t, output)
 }
