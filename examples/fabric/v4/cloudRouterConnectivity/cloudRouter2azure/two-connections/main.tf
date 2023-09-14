@@ -31,7 +31,7 @@ resource  "equinix_fabric_connection" "fcr2azure"{
     access_point {
       type = var.aside_ap_type
       router {
-        uuid = var.cloud_router_uuid
+        uuid = var.cloud_router_primary_uuid
       }
     }
   }
@@ -74,7 +74,7 @@ resource  "equinix_fabric_connection" "fcr2azure2"{
     access_point {
       type = var.aside_ap_type
       router {
-        uuid = var.cloud_router_uuid
+        uuid = var.cloud_router_secondary_uuid
       }
     }
   }
